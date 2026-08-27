@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # EV Charging Energy Prediction - Local Title Version
+=======
+# EV Charging Energy Prediction - Remote Title Version
+>>>>>>> 71d5b08f74b99df75ba3649d728878038c5ec00b
 
 ## Project Overview
 
