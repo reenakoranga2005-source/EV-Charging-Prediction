@@ -12,56 +12,22 @@ EV charging station operators need to estimate the energy required by a charging
 
 This project applies regression-based Machine Learning models to predict:
 
-- Energy Consumed (kWh)
-- Charging Duration (hours) - planned future extension
+- **Energy Consumed (kWh)** (Primary Target)
+- **Charging Duration (hours)** *(Planned future extension)*
 
 ## Dataset
-This project uses the Electric Vehicle Charging Patterns dataset from Kaggle.
+This project utilizes the Electric Vehicle Charging Patterns dataset from Kaggle.
 
-Dataset Source:
-https://www.kaggle.com/datasets/valakhorasani/electric-vehicle-charging-patterns
+* **Source:** [Kaggle - Electric Vehicle Charging Patterns](https://www.kaggle.com/datasets/valakhorasani/electric-vehicle-charging-patterns)
+* **License:** Apache License 2.0
+* **Size:** 1,320 charging sessions across 20 features
+* **Purpose:** Educational and Machine Learning research
 
-License: Apache License 2.0
-
-The dataset is used for educational and Machine Learning purposes.
-
-Dataset: Electric Vehicle Charging Patterns
-
-Dataset contains 1,320 charging sessions and 20 features.
-
-Important features include:
-
-- Vehicle Model
-- Battery Capacity (kWh)
-- Charging Rate (kW)
-- Charging Start Time
-- Charging End Time
-- State of Charge (Start %)
-- State of Charge (End %)
-- Distance Driven
-- Temperature
-- Vehicle Age
-- Charger Type
-- User Type
-
-Target variable:
-
-- Energy Consumed (kWh)
-
-## Machine Learning Models
-
-The project compares different regression algorithms:
-
-1. Linear Regression
-2. Decision Tree Regression
-3. Random Forest Regression
-4. Gradient Boosting Regression
-
-The models are evaluated using:
-
-- MAE
-- RMSE
-- R² Score
+### Key Features
+* **Vehicle Metrics:** Vehicle Model, Battery Capacity (kWh), Vehicle Age
+* **Session Metrics:** Charging Start/End Time, State of Charge (Start % & End %), Distance Driven
+* **Environmental & Hardware:** Temperature, Charger Type, User Type
+* **Target Variable:** `Energy Consumed (kWh)`
 
 ## Project Structure
 
@@ -77,10 +43,10 @@ EV_Charging_Prediction/
 ├── src/
 │   ├── __init__.py
 │   ├── data_preprocessing.py
+│   ├── data_analysis.py
 │   ├── train_model.py
 │   ├── evaluate_model.py
 │   ├── model_comparison.py
-│   ├── data_analysis.py
 │   └── predict.py
 │
 ├── main.py
