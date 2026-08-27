@@ -1,59 +1,103 @@
 import pandas as pd
 
-DATA_PATH = "C:/Users/mysel/OneDrive/Desktop/ev_charging prediction/data/ev_charging_patterns.csv"
+DATA_PATH = "data/ev_workplace_charging_data.csv"
 
+# Load dataset
 df = pd.read_csv(DATA_PATH)
 
-print("Dataset Shape:", df.shape)
+print("=" * 50)
+print("EV WORKPLACE CHARGING DATASET")
+print("=" * 50)
+
+# ------------------------------------------------
+# 1. Dataset shape
+# ------------------------------------------------
+
+print("\nDataset Shape:")
+print(df.shape)
+
+
+# ------------------------------------------------
+# 2. Columns
+# ------------------------------------------------
+
+print("\nColumns:")
+print(df.columns.tolist())
+
+
+# ------------------------------------------------
+# 3. Missing values
+# ------------------------------------------------
 
 print("\nMissing Values:")
 print(df.isnull().sum())
 
+
+# ------------------------------------------------
+# 4. Energy statistics
+# ------------------------------------------------
+
 print("\nEnergy Consumption Statistics:")
-print(df["Energy Consumed (kWh)"].describe())
+print(df["kwhTotal"].describe())
+
+
+# ------------------------------------------------
+# 5. Charging duration statistics
+# ------------------------------------------------
+
+print("\nCharging Duration Statistics:")
+print(df["chargeTimeHrs"].describe())
+
+
+# ------------------------------------------------
+# 6. Numerical correlations with energy
+# ------------------------------------------------
 
 print("\nCorrelation with Energy Consumption:")
 
-numerical_columns = [
-    "Battery Capacity (kWh)",
-    "Charging Rate (kW)",
-    "State of Charge (Start %)",
-    "State of Charge (End %)",
-    "Distance Driven (since last charge) (km)",
-    "Temperature (°C)",
-    "Vehicle Age (years)",
-    "Energy Consumed (kWh)"
-]
+numeric_df = df.select_dtypes(include="number")
 
-correlation = df[numerical_columns].corr()
-
-print(
-    correlation["Energy Consumed (kWh)"]
+energy_corr = (
+    numeric_df.corr()["kwhTotal"]
     .sort_values(ascending=False)
 )
-print("\nCharging Duration Correlation:")
 
-print(
-    df[
-        [
-            "Energy Consumed (kWh)",
-            "Charging Duration (hours)",
-            "Charging Rate (kW)"
-        ]
-    ].corr()["Energy Consumed (kWh)"]
-)
-df["Calculated Energy"] = (
-    df["Charging Duration (hours)"]
-    * df["Charging Rate (kW)"]
+print(energy_corr)
+
+
+# ------------------------------------------------
+# 7. Numerical correlations with duration
+# ------------------------------------------------
+
+print("\nCorrelation with Charging Duration:")
+
+duration_corr = (
+    numeric_df.corr()["chargeTimeHrs"]
+    .sort_values(ascending=False)
 )
 
-print("\nActual vs Calculated Energy:")
+print(duration_corr)
 
-print(
-    df[
-        [
-            "Energy Consumed (kWh)",
-            "Calculated Energy"
-        ]
-    ].head(10)
-)
+
+# ------------------------------------------------
+# 8. Sample records
+# ------------------------------------------------
+
+print("\nSample Charging Sessions:")
+
+sample_columns = [
+    "kwhTotal",
+    "chargeTimeHrs",
+    "distance",
+    "stationId",
+    "locationId",
+    "totalSessions"
+]
+
+# Only use columns that actually exist
+available_columns = [
+    col for col in sample_columns
+    if col in df.columns
+]
+
+print(df[available_columns].head(10))
