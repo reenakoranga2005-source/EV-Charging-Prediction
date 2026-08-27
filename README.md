@@ -1,4 +1,4 @@
-# EV Charging Energy Prediction - Local Version
+# EV Charging Energy Prediction - Remote Title Version
 
 ## Project Overview
 
