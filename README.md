@@ -1,4 +1,4 @@
-# EV Charging Energy Consumption Prediction
+# EV Charging Energy Prediction - New Version
 
 ## Project Overview
 
